@@ -7,15 +7,17 @@ using System.Threading.Tasks;
 
 namespace MegansBlog.Models
 {
-    [Table("Posts")]
-    public class Post
+    [Table("Categories")]
+    public class Category
     {
+        public Category()
+        {
+            this.Posts = new HashSet<Post>();
+        }
+
         [Key]
-        public int PostId { get; set; }
-        public string Title { get; set; }
-        public string Body { get; set; }
-        public DateTime PostDate { get; set; }
         public int CategoryId { get; set; }
-        public virtual Category Category { get; set; }
+        public string Name { get; set; }
+        public virtual ICollection<Post> Posts { get; set; }
     }
 }

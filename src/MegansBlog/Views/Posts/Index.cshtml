@@ -1,18 +1,17 @@
-﻿@model IEnumerable<MegansBlog.Models.Post>
+﻿@{ 
+    ViewData["Title"] = "Megan's Blog";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
-<html>
-<head>
-    <title>Megan's Blog</title>
-</head>
-<body>
-    <h2>Megan's Blog</h2>
-    <h4>All Blog Posts:</h4>
-    <ul>
-        @foreach (var listPost in Model)
-        {
-            <li>@Html.DisplayFor(modelPost => listPost.Title) | @Html.ActionLink("Details", "Details", new { id = listPost.PostId }) |  | @Html.ActionLink("Edit", "Edit", new { id = listPost.PostId }) | @Html.ActionLink("Delete", "Delete", new {id = listPost.PostId })</li>
-        }
-    </ul>
-    <p>@Html.ActionLink("Add new post", "Create")</p>
-</body>
-</html>
+@model IEnumerable<MegansBlog.Models.Post>
+
+
+<h2>Megan's Blog</h2>
+<h4>All Blog Posts:</h4>
+<ul>
+    @foreach (var listPost in Model)
+    {
+        <li>@Html.DisplayFor(modelPost => listPost.Title) - Category: @Html.DisplayFor(modelPost => listPost.Category.Name) | @Html.ActionLink("Details", "Details", new { id = listPost.PostId }) | @Html.ActionLink("Edit", "Edit", new { id = listPost.PostId }) | @Html.ActionLink("Delete", "Delete", new { id = listPost.PostId })</li>
+    }
+</ul>
+<p>@Html.ActionLink("Add new post", "Create")</p>

@@ -1,34 +1,32 @@
-﻿@model MegansBlog.Models.Post
+﻿@{
+    ViewData["Title"] = "Megan's Blog - Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
-<html>
-<head>
-    <title>Megan's Blog - Edit</title>
-</head>
+@model MegansBlog.Models.Post
 
-<body>
-    <h2>Edit</h2>
-    <hr />
-    <h4>Edit this post: @Html.DisplayFor(model => model.Title)</h4>
 
-    @using (Html.BeginForm())
-    {
-        @Html.HiddenFor(model => model.PostId)
+<h2>Edit</h2>
+<hr />
+<h4>Edit this post: @Html.DisplayFor(model => model.Title)</h4>
 
-        @Html.LabelFor(model => model.Title)
-        @Html.EditorFor(model => model.Title)
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.PostId)
 
-        @Html.LabelFor(model => model.Body)
-        @Html.EditorFor(model => model.Body)
+    @Html.LabelFor(model => model.Title)
+    @Html.EditorFor(model => model.Title)
 
-        @Html.LabelFor(model => model.PostDate)
-        @Html.EditorFor(model => model.PostDate)
+    @Html.LabelFor(model => model.Body)
+    @Html.EditorFor(model => model.Body)
 
-        @Html.LabelFor(model => model.CategoryId)
-        @Html.EditorFor(model => model.CategoryId)
+    @Html.LabelFor(model => model.PostDate)
+    @Html.EditorFor(model => model.PostDate)
 
-        <input type="submit" value="Save" />
+    @Html.LabelFor(model => model.CategoryId)
+    @Html.EditorFor(model => model.CategoryId)
 
-    }
-    <p>@Html.ActionLink("Back to list", "Index")</p>
-</body>
-</html>
+    <input type="submit" value="Save" />
+
+}
+<p>@Html.ActionLink("Back to list", "Index")</p>

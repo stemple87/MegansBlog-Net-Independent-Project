@@ -8,6 +8,7 @@ namespace MegansBlog.Models
 {
     public class MegansBlogContext : DbContext
     {
+        public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Post> Posts { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {

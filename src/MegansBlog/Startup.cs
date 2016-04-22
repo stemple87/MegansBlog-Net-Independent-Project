@@ -36,8 +36,10 @@ namespace MegansBlog
 
         public void Configure(IApplicationBuilder app)
         {
-            app.UseIISPlatformHandler();
 
+            app.UseStaticFiles();
+
+            app.UseIISPlatformHandler();
 
             app.UseMvc(routes =>
             {
