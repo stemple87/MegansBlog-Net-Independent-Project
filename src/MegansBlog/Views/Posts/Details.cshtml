@@ -1,0 +1,17 @@
+﻿@model MegansBlog.Models.Post
+
+<html>
+<head>
+    <title>Megan's Blog - Details</title>
+</head>
+<body>
+    <h2>Details</h2>
+    <p>In Category: </p>@Html.DisplayFor(model => model.CategoryId)
+    <hr />
+    <p>Title: </p>@Html.DisplayFor(model => model.Title) <p>Post Date: </p> @Html.DisplayFor(model => model.PostDate)
+    <hr />
+    <p>Content: </p>@Html.DisplayFor(model => model.Body)
+    <br />
+    <p>@Html.ActionLink("Back to list", "Index")</p>
+</body>
+</html>

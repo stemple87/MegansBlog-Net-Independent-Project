@@ -1,0 +1,17 @@
+﻿@model IEnumerable<MegansBlog.Models.Post>
+
+<html>
+<head>
+    <title>Megan's Blog</title>
+</head>
+<body>
+    <h2>Megan's Blog</h2>
+    <h4>All Blog Posts:</h4>
+    <ul>
+        @foreach (var listPost in Model)
+        {
+            <li>@Html.DisplayFor(modelPost => listPost.Title) | @Html.ActionLink("Details", "Details", new { id = listPost.PostId })</li>
+        }
+    </ul>
+</body>
+</html>
