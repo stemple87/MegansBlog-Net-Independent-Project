@@ -21,7 +21,8 @@
     @Html.TextBoxFor(model => model.PostDate)
 
     @Html.LabelFor(model => model.CategoryId)
-    @Html.TextBoxFor(model => model.CategoryId)
+    @Html.DropDownList("CategoryId")
+
     <input type="submit" value="Add new post" />
 }
 <p>@Html.ActionLink("Back to list", "Index")</p>

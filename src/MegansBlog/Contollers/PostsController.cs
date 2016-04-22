@@ -21,6 +21,8 @@ namespace MegansBlog.Contollers
         public IActionResult Details(int id)
         {
             var thisPost = db.Posts.FirstOrDefault(posts => posts.PostId == id);
+            Category newCategory = db.Categories.FirstOrDefault(x => x.CategoryId == id);
+            thisPost.Category = newCategory;
             return View(thisPost);
         }
         public ActionResult Create()

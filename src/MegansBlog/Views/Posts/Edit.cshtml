@@ -24,9 +24,9 @@
     @Html.EditorFor(model => model.PostDate)
 
     @Html.LabelFor(model => model.CategoryId)
-    @Html.EditorFor(model => model.CategoryId)
+    @Html.DropDownList("CategoryId")
 
-    <input type="submit" value="Save" />
+    <input type="submit" value="Save" class="btn btn-default"/>
 
 }
 <p>@Html.ActionLink("Back to list", "Index")</p>
