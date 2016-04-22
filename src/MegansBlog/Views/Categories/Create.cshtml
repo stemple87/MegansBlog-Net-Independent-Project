@@ -1,5 +1,17 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    ViewData["Title"] = "Megan's Blog - Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+@model MegansBlog.Models.Category
+
+<h2>Create</h2>
+<hr />
+<h4>Add a new task</h4>
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(model => model.Name)
+    @Html.TextBoxFor(model => model.Name)
+    <input type="submit" value="Add new category" />
+}
+<p>@Html.ActionLink("Back to list", "Index")</p>
