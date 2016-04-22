@@ -18,10 +18,25 @@ namespace MegansBlog.Contollers
             return View(db.Posts.ToList());
         }
 
+        // View Details
         public IActionResult Details(int id)
         {
             var thisPost = db.Posts.FirstOrDefault(posts => posts.PostId == id);
             return View(thisPost);
+        }
+
+        //Create new Post
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Post post)
+        {
+            db.Posts.Add(post);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }

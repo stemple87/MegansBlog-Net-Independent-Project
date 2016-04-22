@@ -1,0 +1,28 @@
+﻿@model MegansBlog.Models.Post
+
+<html>
+<head>
+    <title>Megan's Blog - Create</title>
+</head>
+<body>
+    <h2>Create</h2>
+    <hr />
+    <h4>Add a new post</h4>
+    @using (Html.BeginForm())
+    {
+        @Html.LabelFor(model => model.Title)
+        @Html.TextBoxFor(model => model.Title)
+
+        @Html.LabelFor(model => model.Body)
+        @Html.TextBoxFor(model => model.Body)
+
+        @Html.LabelFor(model => model.PostDate)
+        @Html.TextBoxFor(model => model.PostDate)
+
+        @Html.LabelFor(model => model.CategoryId)
+        @Html.TextBoxFor(model => model.CategoryId)
+        <input type="submit" value="Add new post" />
+    }
+    <p>@Html.ActionLink("Back to list", "Index")</p>
+</body>
+</html>
