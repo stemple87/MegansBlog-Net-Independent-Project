@@ -1,0 +1,34 @@
+﻿@model MegansBlog.Models.Post
+
+<html>
+<head>
+    <title>Megan's Blog - Edit</title>
+</head>
+
+<body>
+    <h2>Edit</h2>
+    <hr />
+    <h4>Edit this post: @Html.DisplayFor(model => model.Title)</h4>
+
+    @using (Html.BeginForm())
+    {
+        @Html.HiddenFor(model => model.PostId)
+
+        @Html.LabelFor(model => model.Title)
+        @Html.EditorFor(model => model.Title)
+
+        @Html.LabelFor(model => model.Body)
+        @Html.EditorFor(model => model.Body)
+
+        @Html.LabelFor(model => model.PostDate)
+        @Html.EditorFor(model => model.PostDate)
+
+        @Html.LabelFor(model => model.CategoryId)
+        @Html.EditorFor(model => model.CategoryId)
+
+        <input type="submit" value="Save" />
+
+    }
+    <p>@Html.ActionLink("Back to list", "Index")</p>
+</body>
+</html>
