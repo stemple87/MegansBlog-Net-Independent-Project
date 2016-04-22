@@ -33,7 +33,10 @@ namespace MegansBlog.Contollers
         [HttpPost]
         public ActionResult Create(Post post)
         {
+            DateTime timeStamp = DateTime.Now;
+            post.PostDate = timeStamp;
             db.Posts.Add(post);
+
             db.SaveChanges();
             return RedirectToAction("Index");
         }

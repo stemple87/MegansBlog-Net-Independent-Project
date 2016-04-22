@@ -7,9 +7,9 @@
 
 
 <h2>Details</h2>
-<p>In Category: </p>@Html.DisplayFor(model => model.Category)
+<p>In Category: </p>@Html.DisplayFor(model => model.Category.Name)
 <hr />
-<p>Title: </p>@Html.DisplayFor(model => model.Title) <p>Post Date: </p> @Html.DisplayFor(model => model.PostDate)
+<p>Title: </p>@Html.DisplayFor(model => model.Title) <p>Post Date: </p> @Html.DisplayFor(model => model.PostDate);
 <hr />
 <p>Content: </p>@Html.DisplayFor(model => model.Body)
 <br />
