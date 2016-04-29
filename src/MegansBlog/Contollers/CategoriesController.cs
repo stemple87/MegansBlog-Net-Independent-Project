@@ -2,20 +2,33 @@
 using MegansBlog.Models;
 using System.Linq;
 using Microsoft.Data.Entity;
+using Microsoft.AspNet.Authorization;
+using Microsoft.AspNet.Identity;
 
 namespace MegansBlog.Controllers
 {
+    [Authorize]
     public class CategoriesController : Controller
     {
-        private MegansBlogContext db = new MegansBlogContext();
+        private readonly ApplicationDbContext _db;
+        private readonly UserManager<ApplicationUser> _userManager;
+
+        public CategoriesController(
+            UserManager<ApplicationUser> userManager,
+            ApplicationDbContext db
+        )
+        {
+            _userManager = userManager;
+            _db = db;
+        }
         public IActionResult Index()
         {
-            return View(db.Categories.ToList());
+            return View(_db.Categories.ToList());
         }
 
         public IActionResult Details(int id)
         {
-            var thisCategory = db.Categories.FirstOrDefault(categories => categories.CategoryId == id);
+            var thisCategory = _db.Categories.FirstOrDefault(categories => categories.CategoryId == id);
             return View(thisCategory);
         }
 
@@ -27,37 +40,37 @@ namespace MegansBlog.Controllers
         [HttpPost]
         public IActionResult Create(Category category)
         {
-            db.Categories.Add(category);
-            db.SaveChanges();
+            _db.Categories.Add(category);
+            _db.SaveChanges();
             return RedirectToAction("Index");
         }
 
         public IActionResult Edit(int id)
         {
-            var thisCategory = db.Categories.FirstOrDefault(categories => categories.CategoryId == id);
+            var thisCategory = _db.Categories.FirstOrDefault(categories => categories.CategoryId == id);
             return View(thisCategory);
         }
 
         [HttpPost]
         public IActionResult Edit(Category category)
         {
-            db.Entry(category).State = EntityState.Modified;
-            db.SaveChanges();
+            _db.Entry(category).State = EntityState.Modified;
+            _db.SaveChanges();
             return RedirectToAction("Index");
         }
 
         public IActionResult Delete(int id)
         {
-            var thisCategory = db.Categories.FirstOrDefault(categories => categories.CategoryId == id);
+            var thisCategory = _db.Categories.FirstOrDefault(categories => categories.CategoryId == id);
             return View(thisCategory);
         }
 
         [HttpPost, ActionName("Delete")]
         public IActionResult DeleteConfirmed(int id)
         {
-            var thisCategory = db.Categories.FirstOrDefault(categories => categories.CategoryId == id);
-            db.Categories.Remove(thisCategory);
-            db.SaveChanges();
+            var thisCategory = _db.Categories.FirstOrDefault(categories => categories.CategoryId == id);
+            _db.Categories.Remove(thisCategory);
+            _db.SaveChanges();
             return RedirectToAction("Index");
         }
     }

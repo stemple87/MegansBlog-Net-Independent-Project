@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using System.Security.Claims
+
+<h2>Welcome to Megan's Blog</h2>
+<hr />
+@if (User.IsSignedIn())
+{
+    <p>Hello @User.GetUserName()!</p>
+    @using (Html.BeginForm("LogOff", "Account"))
+    {
+        <input type="submit" class="btn btn-default" value="Log out" />
+    }
+}
+else
+{
+    <p>@Html.ActionLink("Register", "Register")</p>
+    <p>@Html.ActionLink("Log in", "Login")</p>
+}
+
+
+<p>@Html.ActionLink("View all Posts", "Index", "Posts")</p>
+<p>@Html.ActionLink("View all Categories", "Index", "Categories")</p>
