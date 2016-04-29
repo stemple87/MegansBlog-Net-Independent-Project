@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*@model IEnumerator<MegansBlog.Models.Post>
+
+
+<h2>Details for @Html.DisplayFor(model => model.Category)</h2>
+<hr />
+<br />
+
+<hr />
+@if (Model.Title.Any())
+{
+
+    <h5>Here are the Posts for this category:</h5>
+
+    @foreach (var post in Model)
+    {
+        <ul>
+            <li>
+                <span>
+                    @Html.DisplayFor(model => comment.Content) |
+
+                    @Html.ActionLink("Edit Comment", "Edit", "Comment", new { id = comment.CommentId }) |
+                    @Html.ActionLink("Delete Comment", "Delete", "Comment", new { id = comment.CommentId })
+                </span>
+            </li>
+        </ul>
+    }
+}
+else
+{
+    <p>There are no comments! Please add a comment!</p>
+}
+<hr />
+
+<p>@Html.ActionLink("Add comment", "Create", "Comment", new { id = Model.ImageId })</p>
+<p>@Html.ActionLink("Back to your images", "Index")</p>*@

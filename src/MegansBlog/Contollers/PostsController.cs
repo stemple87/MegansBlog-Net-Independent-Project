@@ -13,7 +13,7 @@ using Microsoft.AspNet.Identity;
 
 namespace MegansBlog.Contollers
 {
-    [Authorize]
+    
     public class PostsController : Controller
     {
         private readonly ApplicationDbContext _db;
@@ -36,6 +36,7 @@ namespace MegansBlog.Contollers
             var thisPost = _db.Posts.FirstOrDefault(posts => posts.PostId == id);
             Category newCategory = _db.Categories.FirstOrDefault(x => x.CategoryId == id);
             thisPost.Category = newCategory;
+            thisPost.Comments = _db.Comments.Where(x => x.PostId == id).ToList();
             return View(thisPost);
         }
         public ActionResult Create()

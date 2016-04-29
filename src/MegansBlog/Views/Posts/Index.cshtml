@@ -8,11 +8,13 @@
 
 <h2>Megan's Blog</h2>
 <h4>All Blog Posts:</h4>
+<hr />
 <ul>
     @foreach (var listPost in Model)
     {
         <li>@Html.DisplayFor(modelPost => listPost.Title) - Category: @Html.DisplayFor(modelPost => listPost.Category.Name) | @Html.ActionLink("Details", "Details", new { id = listPost.PostId }) | @Html.ActionLink("Edit", "Edit", new { id = listPost.PostId }) | @Html.ActionLink("Delete", "Delete", new { id = listPost.PostId })</li>
     }
 </ul>
+<hr />
 <p>@Html.ActionLink("Add new post", "Create")</p>
-<p>@Html.ActionLink("Home", "Index", "Home")</p>
+<p>@Html.ActionLink("Home", "Index", "Account")</p>

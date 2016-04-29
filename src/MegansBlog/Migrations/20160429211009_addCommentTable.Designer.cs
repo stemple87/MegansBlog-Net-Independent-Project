@@ -8,9 +8,10 @@ using MegansBlog.Models;
 namespace MegansBlog.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20160429211009_addCommentTable")]
+    partial class addCommentTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.0-rc1-16348")
@@ -85,7 +86,9 @@ namespace MegansBlog.Migrations
 
                     b.Property<string>("Content");
 
-                    b.Property<int>("PostId");
+                    b.Property<int>("ImageId");
+
+                    b.Property<int?>("PostPostId");
 
                     b.Property<string>("UserId");
 
@@ -198,7 +201,7 @@ namespace MegansBlog.Migrations
                 {
                     b.HasOne("MegansBlog.Models.Post")
                         .WithMany()
-                        .HasForeignKey("PostId");
+                        .HasForeignKey("PostPostId");
 
                     b.HasOne("MegansBlog.Models.ApplicationUser")
                         .WithMany()

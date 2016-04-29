@@ -4,6 +4,7 @@
 }
 
 @using System.Security.Claims
+@model ICollection<MegansBlog.Models.Category>
 
 <h2>Welcome to Megan's Blog</h2>
 <hr />
@@ -19,8 +20,18 @@ else
 {
     <p>@Html.ActionLink("Register", "Register")</p>
     <p>@Html.ActionLink("Log in", "Login")</p>
+
 }
 
-
+<hr />
 <p>@Html.ActionLink("View all Posts", "Index", "Posts")</p>
 <p>@Html.ActionLink("View all Categories", "Index", "Categories")</p>
+<hr />
+<h5>All Categories:</h5>
+<ul>
+    @foreach (var categoryList in Model)
+    {
+        var name = categoryList.Name;
+        <li> @Html.ActionLink(name, "Details", "Category", new { id = categoryList.CategoryId })</li>
+    }
+</ul>

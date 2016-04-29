@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model MegansBlog.Models.Comment
+
+<h2>Add a new comment</h2>
+<hr />
+@using (Html.BeginForm())
+{
+    @Html.Hidden("@ViewBag.Pic")
+    @Html.LabelFor(model => model.Content)
+    @Html.EditorFor(model => model.Content)
+
+    <input type="submit" value="Create" />
+}
+@Html.ActionLink("Back to Post Details", "Details", "Post");

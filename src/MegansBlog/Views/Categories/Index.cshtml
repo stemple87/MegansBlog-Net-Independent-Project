@@ -7,11 +7,13 @@
 
 <h2>Megan's Blog</h2>
 <h4>Categories:</h4>
+<hr />
 <ul>
     @foreach (var listCategory in Model)
     {
         <li>@Html.DisplayFor(modelCategory => listCategory.Name) | @Html.ActionLink("Details", "Details", new { id = listCategory.CategoryId }) | @Html.ActionLink("Edit", "Edit", new { id = listCategory.CategoryId }) | @Html.ActionLink("Delete", "Delete", new { id = listCategory.CategoryId })</li>
     }
 </ul>
+<hr />
 <p>@Html.ActionLink("Add new category", "Create")</p>
 <p>@Html.ActionLink("Home", "Index", "Account")</p>

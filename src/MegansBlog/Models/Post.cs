@@ -10,6 +10,10 @@ namespace MegansBlog.Models
     [Table("Posts")]
     public class Post
     {
+        public Post()
+        {
+            this.Comments = new HashSet<Comment>();
+        }
         [Key]
         public int PostId { get; set; }
         public string Title { get; set; }
@@ -17,5 +21,6 @@ namespace MegansBlog.Models
         public DateTime PostDate { get; set; }
         public int CategoryId { get; set; }
         public virtual Category Category { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
     }
 }

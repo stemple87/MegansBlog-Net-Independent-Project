@@ -12,5 +12,32 @@
 <p>Title: </p>@Html.DisplayFor(model => model.Title) <p>Post Date: </p> @Html.DisplayFor(model => model.PostDate);
 <hr />
 <p>Content: </p>@Html.DisplayFor(model => model.Body)
-<br />
+<hr />
+@if (Model.Comments.Count > 0)
+{
+
+    <h5>Here are the comments for your post:</h5>
+
+    @foreach (var comment in Model.Comments)
+    {
+        <ul>
+            <li>
+                <span>
+                    @Html.DisplayFor(model => comment.Content) |
+
+                    @*@Html.ActionLink("Edit Comment", "Edit", "Comment", new { id = comment.CommentId }) |
+                    @Html.ActionLink("Delete Comment", "Delete", "Comment", new { id = comment.CommentId })*@
+                </span>
+            </li>
+        </ul>
+    }
+}
+else
+{
+    <p>There are no comments! Please add a comment!</p>
+}
+<hr />
+
+<p>@Html.ActionLink("Add comment", "Create", "Comments")</p>
+
 <p>@Html.ActionLink("Back to list", "Index")</p>

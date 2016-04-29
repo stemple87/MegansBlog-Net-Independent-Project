@@ -7,7 +7,7 @@ using Microsoft.AspNet.Identity;
 
 namespace MegansBlog.Controllers
 {
-    [Authorize]
+    
     public class CategoriesController : Controller
     {
         private readonly ApplicationDbContext _db;

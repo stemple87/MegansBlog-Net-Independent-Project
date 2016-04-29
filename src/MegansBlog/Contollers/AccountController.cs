@@ -1,7 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
-using Microsoft.AspNet.Identity;
 using MegansBlog.Models;
+using Microsoft.AspNet.Identity;
 using MegansBlog.ViewModels;
 
 namespace MegansBlog.Controllers
@@ -20,7 +23,13 @@ namespace MegansBlog.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            return View(_db.Categories.ToList());
+        }
+
+        public IActionResult Details(int id)
+        {
+            var thisCategory = _db.Categories.FirstOrDefault(posts => posts.CategoryId == id);
+            return View(thisCategory);
         }
 
         //Register
