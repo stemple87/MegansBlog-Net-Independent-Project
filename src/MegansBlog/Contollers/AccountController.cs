@@ -88,27 +88,17 @@ namespace MegansBlog.Controllers
         {
             return View();
         }
-
-        //[HttpGet]
+        
         public async Task<IActionResult> FetchEmails()
         {
-            Console.WriteLine("IM RUNNING!");
-
-     
-
-
             var client = new RestClient("https://us13.api.mailchimp.com/3.0/")
             {
                 Authenticator = new HttpBasicAuthenticator("stemple87", "AUTHNUMBERGITIGNORE")
             };
-
             var request = new RestRequest("/lists/05e228c8bb/members", Method.GET);
-
             request.AddParameter("name", "epicodus");
-
             var queryResult = client.Execute(request);
             Console.WriteLine(queryResult.Content);
-
             return View("Index");
         }
 
@@ -125,7 +115,6 @@ namespace MegansBlog.Controllers
                 Authenticator = new HttpBasicAuthenticator("stemple87", "25c5d5915005c2d37ed810de0c897de7-us13")
             };
 
-
             RestRequest request = new RestRequest("lists/05e228c8bb/members/", Method.POST);
 
             var yourobject = new
@@ -138,22 +127,11 @@ namespace MegansBlog.Controllers
                     LNAME = lastName
                 }
             };
+
             var json = request.JsonSerializer.Serialize(yourobject);
-
             request.AddParameter("application/json; charset=utf-8", json, ParameterType.RequestBody);
-
             IRestResponse response = client.Execute(request);
-
-            //var queryResult = client.Execute(request);
-
-            Console.WriteLine(response.Content);
-
-            //var request = new RestRequest("/lists/05e228c8bb/members", Method.POST);
-
-
-
             return View("Index");
         }
-
     }
 }
