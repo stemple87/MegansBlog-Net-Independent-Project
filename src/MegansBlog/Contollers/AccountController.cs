@@ -59,7 +59,7 @@ namespace MegansBlog.Controllers
             Console.WriteLine("lastName: " + lastName);
             Console.WriteLine("subscribed: " + subscribed);
 
-            if (subscribed != null)
+            if (subscribed == "subscribed")
             {
                 var client = new RestClient("https://us13.api.mailchimp.com/3.0/")
                 {
