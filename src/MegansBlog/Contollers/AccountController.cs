@@ -6,6 +6,10 @@ using Microsoft.AspNet.Mvc;
 using MegansBlog.Models;
 using Microsoft.AspNet.Identity;
 using MegansBlog.ViewModels;
+using RestSharp;
+using RestSharp.Authenticators;
+using System.Net.Http;
+using System.Net.Http.Headers;
 
 namespace MegansBlog.Controllers
 {
@@ -23,7 +27,7 @@ namespace MegansBlog.Controllers
         }
         public IActionResult Index()
         {
-            return View(_db.Categories.ToList());
+            return View();
         }
 
         public IActionResult Details(int id)
@@ -78,6 +82,34 @@ namespace MegansBlog.Controllers
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index");
+        }
+
+        public IActionResult EmailList()
+        {
+            return View();
+        }
+
+        //[HttpGet]
+        public async Task<IActionResult> FetchEmails()
+        {
+            Console.WriteLine("IM RUNNING!");
+
+     
+
+
+            var client = new RestClient("https://us13.api.mailchimp.com/3.0/")
+            {
+                Authenticator = new HttpBasicAuthenticator("stemple87", "AUTHNUMBERGITIGNORE")
+            };
+
+            var request = new RestRequest("/lists/05e228c8bb/members", Method.GET);
+
+            request.AddParameter("name", "epicodus");
+
+            var queryResult = client.Execute(request);
+            Console.WriteLine(queryResult.Content);
+
+            return View("Index");
         }
     }
 }

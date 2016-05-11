@@ -27,11 +27,4 @@ else
 <p>@Html.ActionLink("View all Posts", "Index", "Posts")</p>
 <p>@Html.ActionLink("View all Categories", "Index", "Categories")</p>
 <hr />
-<h5>All Categories:</h5>
-<ul>
-    @foreach (var categoryList in Model)
-    {
-        var name = categoryList.Name;
-        <li> @Html.ActionLink(name, "Details", "Category", new { id = categoryList.CategoryId })</li>
-    }
-</ul>
+
