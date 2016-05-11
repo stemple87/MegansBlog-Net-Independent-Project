@@ -7,3 +7,13 @@
 <h2>Email List</h2>
 
 <p>@Html.ActionLink("Test APi", "FetchEmails", "Account")</p>
+
+@using (Html.BeginForm("SubmitEmail", "Account"))
+{
+    <input name="email" type="email" placeholder="you@email.com" />
+    <button type="submit">Add user to list</button>
+}
+@*<form action="Account/SubmitEmail">
+    <input name="email" type="email" placeholder="you@email.com" />
+    <button type="submit">Add user to list</button>
+</form>*@

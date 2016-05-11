@@ -111,5 +111,33 @@ namespace MegansBlog.Controllers
 
             return View("Index");
         }
+
+        
+        public IActionResult SubmitEmail()
+        {
+            var email = Request.Form["email"];
+
+            var client = new RestClient("https://us13.api.mailchimp.com/3.0/")
+            {
+                Authenticator = new HttpBasicAuthenticator("stemple87", "25c5d5915005c2d37ed810de0c897de7-us13")
+            };
+
+
+            RestRequest request = new RestRequest("/lists/05e228c8bb/members/", Method.POST);
+            request.AddParameter("email_address", email);
+            request.AddParameter("status", "pending");
+            //request.AddParameter("merge_fields", { "FNAME", "Alex"})
+
+            var queryResult = client.Execute(request);
+
+            Console.WriteLine(queryResult.Content);
+
+            //var request = new RestRequest("/lists/05e228c8bb/members", Method.POST);
+
+
+
+            return View("Index");
+        }
+
     }
 }
