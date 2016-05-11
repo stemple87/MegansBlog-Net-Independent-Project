@@ -11,7 +11,11 @@
 @using (Html.BeginForm("SubmitEmail", "Account"))
 {
     <input name="email" type="email" placeholder="you@email.com" />
-    <button type="submit">Add user to list</button>
+    <input name="firstName" type="text" placeholder="first name" />
+    <input name="lastName" type="text" placeholder="last name" />
+    <label for="subscribed">Subscribe</label>
+    <input type="checkbox" name="subscribed" value="subscribed">
+    <button type = "submit" > Add user to list </button >
 }
 @*<form action="Account/SubmitEmail">
     <input name="email" type="email" placeholder="you@email.com" />

@@ -115,7 +115,10 @@ namespace MegansBlog.Controllers
         
         public IActionResult SubmitEmail()
         {
-            //var email = Request.Form["email"];
+            string email = Request.Form["email"];
+            string firstName = Request.Form["firstName"];
+            string lastName = Request.Form["lastName"];
+            string subscribed = Request.Form["subscribed"];
 
             var client = new RestClient("https://us13.api.mailchimp.com/3.0/")
             {
@@ -124,36 +127,17 @@ namespace MegansBlog.Controllers
 
 
             RestRequest request = new RestRequest("lists/05e228c8bb/members/", Method.POST);
-            //request.AddParameter("email_address", "urist.mcvankab@freddiesjokes.com");
-            //request.AddParameter("status", "pending");
-            //request.AddParameter("FNAM", "Alex");
-            //request.AddParameter("LNAM", "Larson");
-
-
-            //request.AddJsonBody(new
-            //{
-            //    id ="62eeb292278cc15f5817cb78f7790b08",
-            //    email_address ="urist.mcvankab@freddiesjokes.com",
-            //    status = "subscribed",
-            //    FNAM = "Urist",
-            //    LNAM = "McVankab" 
-            //    //"merge_fields=
-            //    //{
-            //    //    "FNAM": "Urist",
-            //    //    "LNAME": "McVankab"
-            //    //}
-            //});
 
             var yourobject = new
             {
-                email_address = "urist.sdfab@fredddddesjokes.com",
-                status = "subscribed",
+                email_address = email,
+                status = subscribed,
                 merge_fields= new
                 {
-                FNAM= "Urfffist",
-                LNAME = "McVffankab"
+                    FNAM= firstName,
+                    LNAME = lastName
                 }
-        };
+            };
             var json = request.JsonSerializer.Serialize(yourobject);
 
             request.AddParameter("application/json; charset=utf-8", json, ParameterType.RequestBody);
