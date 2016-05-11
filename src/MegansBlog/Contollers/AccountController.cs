@@ -115,7 +115,7 @@ namespace MegansBlog.Controllers
         
         public IActionResult SubmitEmail()
         {
-            var email = Request.Form["email"];
+            //var email = Request.Form["email"];
 
             var client = new RestClient("https://us13.api.mailchimp.com/3.0/")
             {
@@ -123,14 +123,46 @@ namespace MegansBlog.Controllers
             };
 
 
-            RestRequest request = new RestRequest("/lists/05e228c8bb/members/", Method.POST);
-            request.AddParameter("email_address", email);
-            request.AddParameter("status", "pending");
-            //request.AddParameter("merge_fields", { "FNAME", "Alex"})
+            RestRequest request = new RestRequest("lists/05e228c8bb/members/", Method.POST);
+            //request.AddParameter("email_address", "urist.mcvankab@freddiesjokes.com");
+            //request.AddParameter("status", "pending");
+            //request.AddParameter("FNAM", "Alex");
+            //request.AddParameter("LNAM", "Larson");
 
-            var queryResult = client.Execute(request);
 
-            Console.WriteLine(queryResult.Content);
+            //request.AddJsonBody(new
+            //{
+            //    id ="62eeb292278cc15f5817cb78f7790b08",
+            //    email_address ="urist.mcvankab@freddiesjokes.com",
+            //    status = "subscribed",
+            //    FNAM = "Urist",
+            //    LNAM = "McVankab" 
+            //    //"merge_fields=
+            //    //{
+            //    //    "FNAM": "Urist",
+            //    //    "LNAME": "McVankab"
+            //    //}
+            //});
+
+            var yourobject = new
+            {
+                email_address = "urist.sdfab@fredddddesjokes.com",
+                status = "subscribed",
+                merge_fields= new
+                {
+                FNAM= "Urfffist",
+                LNAME = "McVffankab"
+                }
+        };
+            var json = request.JsonSerializer.Serialize(yourobject);
+
+            request.AddParameter("application/json; charset=utf-8", json, ParameterType.RequestBody);
+
+            IRestResponse response = client.Execute(request);
+
+            //var queryResult = client.Execute(request);
+
+            Console.WriteLine(response.Content);
 
             //var request = new RestRequest("/lists/05e228c8bb/members", Method.POST);
 
