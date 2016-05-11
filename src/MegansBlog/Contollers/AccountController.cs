@@ -47,13 +47,61 @@ namespace MegansBlog.Controllers
         {
             var user = new ApplicationUser { UserName = model.Email };
             IdentityResult result = await _userManager.CreateAsync(user, model.Password);
-            if (result.Succeeded)
+            
+
+            string email = model.Email;
+            string firstName = Request.Form["firstName"];
+            string lastName = Request.Form["lastName"];
+            string subscribed = Request.Form["subscribed"];
+
+            Console.WriteLine("email: " + email);
+            Console.WriteLine("firstName: " + firstName);
+            Console.WriteLine("lastName: " + lastName);
+            Console.WriteLine("subscribed: " + subscribed);
+
+            if (subscribed != null)
             {
-                return RedirectToAction("Index");
+                var client = new RestClient("https://us13.api.mailchimp.com/3.0/")
+                {
+                    Authenticator = new HttpBasicAuthenticator("stemple87", "25c5d5915005c2d37ed810de0c897de7-us13")
+                };
+
+                RestRequest request = new RestRequest("lists/05e228c8bb/members/", Method.POST);
+
+                var yourobject = new
+                {
+                    email_address = email,
+                    status = subscribed,
+                    merge_fields = new
+                    {
+                        FNAM = firstName,
+                        LNAME = lastName
+                    }
+                };
+
+                var json = request.JsonSerializer.Serialize(yourobject);
+                request.AddParameter("application/json; charset=utf-8", json, ParameterType.RequestBody);
+                IRestResponse response = client.Execute(request);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return View();
+                }
             }
             else
             {
-                return View();
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return View();
+                }
             }
         }
 
@@ -103,35 +151,6 @@ namespace MegansBlog.Controllers
         }
 
         
-        public IActionResult SubmitEmail()
-        {
-            string email = Request.Form["email"];
-            string firstName = Request.Form["firstName"];
-            string lastName = Request.Form["lastName"];
-            string subscribed = Request.Form["subscribed"];
-
-            var client = new RestClient("https://us13.api.mailchimp.com/3.0/")
-            {
-                Authenticator = new HttpBasicAuthenticator("stemple87", "25c5d5915005c2d37ed810de0c897de7-us13")
-            };
-
-            RestRequest request = new RestRequest("lists/05e228c8bb/members/", Method.POST);
-
-            var yourobject = new
-            {
-                email_address = email,
-                status = subscribed,
-                merge_fields= new
-                {
-                    FNAM= firstName,
-                    LNAME = lastName
-                }
-            };
-
-            var json = request.JsonSerializer.Serialize(yourobject);
-            request.AddParameter("application/json; charset=utf-8", json, ParameterType.RequestBody);
-            IRestResponse response = client.Execute(request);
-            return View("Index");
-        }
+       
     }
 }

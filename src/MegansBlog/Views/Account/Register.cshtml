@@ -11,6 +11,10 @@
 <hr />
 @using (Html.BeginForm("Register", "Account", FormMethod.Post))
 {
+    <input name="firstName" type="text" placeholder="first name" />
+
+    <input name="lastName" type="text" placeholder="last name" />
+
     @Html.LabelFor(m => m.Email)
     @Html.TextBoxFor(m => m.Email)
 
@@ -19,6 +23,9 @@
 
     @Html.LabelFor(m => m.ConfirmPassword)
     @Html.PasswordFor(m => m.ConfirmPassword)
+
+    <label for="subscribed">Subscribe</label>
+    <input type="checkbox" name="subscribed" value="subscribed">
 
     <input type="submit" value="Register" />
 }
