@@ -1,5 +1,6 @@
 ﻿$(document).ready(function () {
-    $(".dropdown-button").dropdown();
+    //$(".dropdown-button").dropdown();
+
     //Category Create
     $('.new-category').submit(function (event) {
         event.preventDefault();
