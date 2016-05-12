@@ -4,14 +4,21 @@
 }
 
 @model MegansBlog.Models.Category
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <h2>Create</h2>
 <hr />
-<h4>Add a new task</h4>
-@using (Html.BeginForm())
+<h4>Add a new category</h4>
+@*@using (Html.BeginForm())
 {
     @Html.LabelFor(model => model.Name)
     @Html.TextBoxFor(model => model.Name)
     <input type="submit" value="Add new category" />
-}
+}*@
+<form class="new-category">
+    
+    <label for="name">Category: </label>
+    <input type="text" name="name" />
+    <button type="submit">Submit</button>
+</form>
+<div id="result6"></div>
 <p>@Html.ActionLink("Back to list", "Index", "Categories")</p>

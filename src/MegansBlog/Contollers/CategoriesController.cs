@@ -4,6 +4,7 @@ using System.Linq;
 using Microsoft.Data.Entity;
 using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Identity;
+using System;
 
 namespace MegansBlog.Controllers
 {
@@ -37,6 +38,20 @@ namespace MegansBlog.Controllers
             return View();
         }
 
+        //jQuery Post Create
+        //[HttpPost]
+        public IActionResult NewCategory()
+        {
+            Console.WriteLine("HEEEYYYOURGUYS");
+
+            Category newCategory = new Category();
+            newCategory.Name = Request.Form["name"];
+            _db.Categories.Add(newCategory);
+            _db.SaveChanges();
+            return RedirectToAction("Create", "Category");
+        }
+
+        //C# Post Create
         [HttpPost]
         public IActionResult Create(Category category)
         {

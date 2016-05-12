@@ -45,9 +45,10 @@ namespace MegansBlog.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
+
             var user = new ApplicationUser { UserName = model.Email };
             IdentityResult result = await _userManager.CreateAsync(user, model.Password);
-            
+            Console.WriteLine("Testing");
 
             string email = model.Email;
             string firstName = Request.Form["firstName"];
@@ -74,7 +75,7 @@ namespace MegansBlog.Controllers
                     status = subscribed,
                     merge_fields = new
                     {
-                        FNAM = firstName,
+                        FNAME = firstName,
                         LNAME = lastName
                     }
                 };
@@ -150,7 +151,5 @@ namespace MegansBlog.Controllers
             return View("Index");
         }
 
-        
-       
     }
 }

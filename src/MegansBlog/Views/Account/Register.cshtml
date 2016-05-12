@@ -8,13 +8,14 @@
 @model RegisterViewModel
 
 <h2>Register a new user</h2>
-<hr />
+<br />
 @using (Html.BeginForm("Register", "Account", FormMethod.Post))
 {
     <input name="firstName" type="text" placeholder="first name" />
 
     <input name="lastName" type="text" placeholder="last name" />
-
+    <br />
+    <br />
     @Html.LabelFor(m => m.Email)
     @Html.TextBoxFor(m => m.Email)
 
@@ -24,8 +25,9 @@
     @Html.LabelFor(m => m.ConfirmPassword)
     @Html.PasswordFor(m => m.ConfirmPassword)
 
-    <label for="subscribed">Subscribe</label>
-    <input type="checkbox" name="subscribed" value="subscribed">
-
-    <input type="submit" value="Register" />
+    
+    <input type="checkbox" id="subscribed" name="subscribed" value="subscribed"><label for="subscribed">Subscribe to the newsletter</label>
+    <br />
+    <br />
+    <button type="submit" class="button" value="Register">Register</button>
 }

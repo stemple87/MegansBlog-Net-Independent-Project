@@ -20,4 +20,5 @@ namespace MegansBlog.Models
         public string Name { get; set; }
         public virtual ICollection<Post> Posts { get; set; }
     }
+
 }
