@@ -1,7 +1,7 @@
-﻿@{
+﻿@*@{
     ViewData["Title"] = "Megan's Blog - Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
-}
+}*@
 
 @model MegansBlog.Models.Post
 
@@ -9,18 +9,16 @@
 <h2>Create</h2>
 <hr />
 <h4>Add a new post</h4>
-@using (Html.BeginForm())
-{
-    @Html.LabelFor(model => model.Title)
-    @Html.TextBoxFor(model => model.Title)
 
-    @Html.LabelFor(model => model.Body)
-    @Html.TextBoxFor(model => model.Body)
-
-
+<form method="post" asp-action="Create" asp-controller="Posts" enctype="multipart/form-data">
+    <input type="file" name="files" multiple />
+    <br />
+    <p>Title:</p>
+    <input name="Title" />
+    <input name="Body" />
     @Html.LabelFor(model => model.CategoryId)
     @Html.DropDownList("CategoryId")
+    <input type="submit" value="Upload" />
+</form>
 
-    <input type="submit" value="Add new post" />
-}
 <p>@Html.ActionLink("Back to list", "Index")</p>

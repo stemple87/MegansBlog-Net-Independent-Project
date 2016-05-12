@@ -8,6 +8,10 @@ using Microsoft.Data.Entity;
 using Microsoft.AspNet.Mvc.Rendering;
 using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Http;
+using System.IO;
+using Microsoft.Net.Http.Headers;
+using Microsoft.AspNet.Hosting;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -18,14 +22,17 @@ namespace MegansBlog.Contollers
     {
         private readonly ApplicationDbContext _db;
         private readonly UserManager<ApplicationUser> _userManager;
+        private IHostingEnvironment _environment;
 
         public PostsController(
             UserManager<ApplicationUser> userManager,
-            ApplicationDbContext db
+            ApplicationDbContext db,
+            IHostingEnvironment environment
         )
         {
             _userManager = userManager;
             _db = db;
+            _environment = environment;
         }
         public IActionResult Index()
         {
@@ -39,27 +46,77 @@ namespace MegansBlog.Contollers
             thisPost.Comments = _db.Comments.Where(x => x.PostId == id).ToList();
             return View(thisPost);
         }
+
+        //GET: Post/Create
         public ActionResult Create()
         {
             ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Name");
             return View();
         }
+
+        //POST: Post/Create
+        //[HttpPost]
+        //public async Task<ActionResult> Create(ICollection<IFormFile> files)
+        //{
+        //    DateTime timeStamp = DateTime.Now;
+        //    Post post = new Post();
+        //    post.Title = Request.Form["Title"];
+        //    post.Body = Request.Form["Body"];
+        //    post.PostDate = timeStamp;
+        //    var uploads = Path.Combine(_environment.WebRootPath, "uploads");
+        //    string fileName;
+        //    foreach (var file in files)
+        //    {
+        //        if (file.Length > 0)
+        //        {
+        //            fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+        //            await file.SaveAsAsync(Path.Combine(uploads, fileName));
+        //            post.Image = "/uploads/" + fileName;
+        //            break;
+        //        }
+        //    }
+        //    _db.Posts.Add(post);
+        //    _db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
+
         [HttpPost]
-        public ActionResult Create(Post post)
+        public async Task<IActionResult> Create(ICollection<IFormFile> files)
         {
             DateTime timeStamp = DateTime.Now;
+            Post post = new Post();
+            post.Title = Request.Form["Title"];
+            post.Body = Request.Form["Body"];
             post.PostDate = timeStamp;
-            _db.Posts.Add(post);
+            //post.User = await _userManager.FindByIdAsync(User.GetUserId());
+            //var currentUser = await _userManager.FindByIdAsync(User.GetUserId());
+            //image.User = currentUser;
+            var uploads = Path.Combine(_environment.WebRootPath, "uploads");
+            string fileName;
+            foreach (var file in files)
+            {
+                if (file.Length > 0)
+                {
+                    fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+                    await file.SaveAsAsync(Path.Combine(uploads, fileName));
+                    post.Image = "/uploads/" + fileName;
+                    break;
+                }
+            }
 
+            _db.Posts.Add(post);
             _db.SaveChanges();
             return RedirectToAction("Index");
+            //return View();
         }
+
         public ActionResult Edit(int id)
         {
             var thisPost = _db.Posts.FirstOrDefault(posts => posts.PostId == id);
             ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Name");
             return View(thisPost);
         }
+
         [HttpPost]
         public ActionResult Edit(Post post)
         {

@@ -18,6 +18,7 @@ namespace MegansBlog.Models
         public int PostId { get; set; }
         public string Title { get; set; }
         public string Body { get; set; }
+        public string Image { get; set; }
         public DateTime PostDate { get; set; }
         public int CategoryId { get; set; }
         public virtual Category Category { get; set; }
