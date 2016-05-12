@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims
+
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -11,6 +13,39 @@
     <script src="~/js/scripts.js"></script>
 </head>
 <body>
+    <nav>
+        <div class="nav-wrapper">
+            @Html.ActionLink("Megan's Blog", "Index", "Account", new { @class = "brand-logo" })
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                @if (User.IsSignedIn())
+                {
+                    <li>
+                        @using (Html.BeginForm("LogOff", "Account"))
+                        {
+                            <input type="submit" class="btn btn-default" value="Log out" />
+                        }
+                    </li>
+                    <li>Signed in as @User.GetUserName()</li>
+
+                        @if (User.IsInRole("Admin"))
+                        {
+
+                            <li>@Html.ActionLink("User Roles", "index", "Roles")</li>
+
+                        }
+
+
+
+                }
+                else
+                {
+                    <span>@Html.ActionLink("Register", "Register")</span>
+                        <span>@Html.ActionLink("Log in", "Login")</span>
+                }
+                
+            </ul>
+        </div>
+    </nav>
     <div class="container">
         @RenderBody()
     </div>

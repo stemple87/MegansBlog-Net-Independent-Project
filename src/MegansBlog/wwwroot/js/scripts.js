@@ -1,10 +1,8 @@
 ﻿$(document).ready(function () {
+    $(".dropdown-button").dropdown();
     //Category Create
     $('.new-category').submit(function (event) {
         event.preventDefault();
-        debugger;
-        console.log("Begin Function")
-        
         $.ajax({
             url: '~/../../Categories/NewCategory',
             type: 'POST',
@@ -16,6 +14,6 @@
                 console.log("SUCCCCESSSS");
             }
         });
-        console.log("ENd Function")
+
     });
 });
